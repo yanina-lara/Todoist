@@ -7,10 +7,11 @@ class Task < ApplicationRecord
   has_many :tag_tasks
   has_many :tags, through: :tag_tasks
 
-  scope :filter_status,            -> (status)             { where status: status }
-  scope :filter_level,             -> (level)              { where level: level }
-  scope :filter_created_at,        -> (created_at)         { where('created_at >= ?', created_at) }
-  scope :filter_deadline,          -> (deadline)           { where('deadline <= ?', deadline) }
-  scope :filter_tag,               -> (tag)                { joins(:tags).where("tags.id = ?", tag)}
+  scope :filter_status, -> (status) { where status: status }
+  scope :filter_level, -> (level) { where level: level }
+  scope :filter_created_at, -> (created_at) { where('created_at >= ?', created_at) }
+  scope :filter_deadline, -> (deadline) { where('deadline <= ?', deadline) }
+  scope :filter_tag, -> (tag) { joins(:tags).where("tags.id = ?", tag)}
+  scope :filter_deadline_range, -> (deadline_end) { where("deadline >= ? AND ? <= deadline", DateTime.now, deadline_end)}
   scope :order_deadline_level, -> { order('deadline DESC', created_at: :desc) }
 end

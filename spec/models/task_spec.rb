@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Task, type: :model do
+RSpec.describe "Test from model task", Task, type: :model do
   it 'can create with valid attributes' do
     expect(FactoryBot.create(:task)).to be_valid.and be_an_instance_of(Task)
   end
@@ -23,4 +23,15 @@ RSpec.describe Task, type: :model do
     expect { FactoryBot.create(:task, user_id: nil) }.to raise_error(ActiveRecord::RecordInvalid)
   end
 
+  context 'associations' do
+    let(:task) { FactoryBot.create :task }
+    subject { task }
+
+    it 'with user' do
+      should belong_to(:user) 
+    end
+    it 'with tag_tasks' do
+      should have_many(:tag_tasks)
+    end
+  end
 end

@@ -4,13 +4,11 @@ class ApplicationController < ActionController::Base
   before_action :require_login, :correct_user
 
   def require_login
-    if current_user.nil?
-      redirect_to not_logged
-    end
+    redirect_to not_logged if current_user.nil?
   end
 
   def current_user
-    @current_user ||= User.find(1)
+    @current_user ||= User.find(params["user_id"])
   end
 
   def correct_user

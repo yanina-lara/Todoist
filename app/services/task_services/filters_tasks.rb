@@ -1,7 +1,7 @@
 module TaskServices
   class FiltersTasks
 
-    KEY_LIST = %i[deadline created_at tag level status].freeze
+    KEY_LIST = %i[deadline created_at tag level status deadline_range].freeze
 
     def initialize(user, args = {})
       @user = user

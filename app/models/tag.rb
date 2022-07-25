@@ -10,8 +10,8 @@ class Tag < ApplicationRecord
   private
 
   def valid_name
-    if Tag.where(user_id: 1).map(&:name).include?(self.name)
-      errors.add(:tag_name, "Ya esta utilizando ese nombre")
+    if Tag.where(user_id: current_user.id).map(&:name).include?(self.name)
+      errors.add(:tag_name, "Already using the name")
     end
   end
 end
