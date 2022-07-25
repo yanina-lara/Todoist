@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   def index
     @tasks = TaskServices::FiltersTasks.new(current_user.id, 
               :deadline_range => DateTime.now + 7.days, 
-              :status => "to_do").filter_tasks.order_deadline_level
+              :status => "to_do").apply_filters.order_deadline_level
   end
 
   def show_tasks_tag

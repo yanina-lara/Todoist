@@ -8,7 +8,7 @@ module TaskServices
       @args = args
     end
 
-    def filter_tasks
+    def apply_filters
       results = Task.where(user_id: user)
       return results if args.blank?
       args.each do |key, value|
